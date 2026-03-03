@@ -25,28 +25,28 @@ export default function CharactersPage() {
     const debouncedSpecies = useDebounce(speciesInput, 400)
 
     useEffect(() => {
-  const currentName = params.get('name') ?? ''
-  const currentSpecies = params.get('species') ?? ''
+        const currentName = params.get('name') ?? ''
+        const currentSpecies = params.get('species') ?? ''
 
-  if (
-    debouncedName === currentName &&
-    debouncedSpecies === currentSpecies
-  ) {
-    return
-  }
+        if (
+            debouncedName === currentName &&
+            debouncedSpecies === currentSpecies
+        ) {
+            return
+        }
 
-  const next = new URLSearchParams(params)
+        const next = new URLSearchParams(params)
 
-  if (debouncedName) next.set('name', debouncedName)
-  else next.delete('name')
+        if (debouncedName) next.set('name', debouncedName)
+        else next.delete('name')
 
-  if (debouncedSpecies) next.set('species', debouncedSpecies)
-  else next.delete('species')
+        if (debouncedSpecies) next.set('species', debouncedSpecies)
+        else next.delete('species')
 
-  next.set('page', '1')
+        next.set('page', '1')
 
-  setParams(next)
-}, [debouncedName, debouncedSpecies, params])
+        setParams(next)
+    }, [debouncedName, debouncedSpecies, params])
     const query = useCharacters({
         page,
         name: nameParam || undefined,
@@ -54,17 +54,15 @@ export default function CharactersPage() {
     })
 
     const goToDetail = (id: number) => {
-        navigate(`/characters/${id}`, {
+        navigate(`characters/${id}`, {
             state: { from: location.pathname + location.search }
         })
     }
 
-    // Loading inicial
     if (query.isLoading && !query.data) {
         return <div>Cargando...</div>
     }
 
-    // Error
     if (query.isError) {
         const error = query.error as ApiError
 
@@ -89,7 +87,7 @@ export default function CharactersPage() {
     const characters = query.data?.results ?? []
 
     return (
-        <section className="flex flex-col gap-6">
+        <section className="flex flex-col gap-6 items-center">
             <h1 className="text-2xl font-bold">Lista de personajes</h1>
 
             <FiltersBar

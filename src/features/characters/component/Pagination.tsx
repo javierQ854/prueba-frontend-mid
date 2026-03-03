@@ -14,14 +14,28 @@ export function Pagination({
   onNext
 }: Props) {
   return (
-    <div className="flex justify-between">
-      <button disabled={!hasPrev} onClick={onPrev}>
+    <div className="flex items-center justify-center space-x-4 mt-6">
+      <button
+        onClick={onPrev}
+        disabled={!hasPrev}
+        className={`
+          px-4 py-2 rounded-full font-medium transition-colors duration-200 cursor-pointer
+          ${hasPrev ? 'bg-blue-500 text-white hover:bg-blue-600' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}
+        `}
+      >
         Back
       </button>
 
-      <span>Página {page}</span>
+      <span className="font-semibold text-gray-700">Página {page}</span>
 
-      <button disabled={!hasNext} onClick={onNext}>
+      <button
+        onClick={onNext}
+        disabled={!hasNext}
+        className={`
+          px-4 py-2 rounded-full font-medium transition-colors duration-200 cursor-pointer
+          ${hasNext ? 'bg-blue-500 text-white hover:bg-blue-600' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}
+        `}
+      >
         Next
       </button>
     </div>

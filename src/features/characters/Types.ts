@@ -1,4 +1,4 @@
-export interface ApiListResponse<T> {
+export interface ApiListResponse<T> { 
   info: Info
   results: T[]
 }

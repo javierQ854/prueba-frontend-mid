@@ -5,7 +5,7 @@ export const characterApi = {
   list: (params: {
     page: number
     name?: string
-    species?: string
+    species?: string 
   }) =>
     httpClient.get<ApiListResponse<Character>>('/api/character', params),
 

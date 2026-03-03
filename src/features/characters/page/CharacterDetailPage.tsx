@@ -1,8 +1,9 @@
 import { useParams, useNavigate, useLocation } from 'react-router-dom'
 import { useCharacter } from '../hooks/useCharacter'
-import { useEpisodes } from '../hooks/useEpisodies' 
-import { EpisodeList } from '../component/EpisodiList' 
+import { useEpisodes } from '../hooks/useEpisodes' 
+import { EpisodeList } from '../component/EpisodeList' 
 import { ApiError } from '@/lib/httpClient'
+
 
 function extractEpisodeIds(urls: string[]): number[] {
   return urls
@@ -44,32 +45,37 @@ export default function CharacterDetailPage() {
   const character = characterQuery.data!
 
   return (
-    <section className="flex flex-col gap-6">
-      <button
-        className="border px-3 py-1"
-        onClick={() => navigate(from ?? `/?page=1`)}
-      >
-        Atrás
-      </button>
+    <section className="flex flex-col gap-6 p-6 bg-gray-50 rounded-lg shadow-md">
+  <button
+    className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors shadow"
+    onClick={() => navigate(from ?? `/?page=1`)}
+  >
+    Atrás
+  </button>
 
-      <div className="flex gap-6">
-        <img src={character.image} alt={character.name} />
+  <div className="flex flex-col md:flex-row gap-6 items-center bg-white p-4 rounded-lg shadow-lg">
+    <img
+      src={character.image}
+      alt={character.name}
+      className="w-40 h-40 object-cover rounded-full border-2 border-gray-300"
+    />
 
-        <div>
-          <h2 className="text-2xl font-bold">{character.name}</h2>
-          <p>Status: {character.status}</p>
-          <p>Species: {character.species}</p>
-          <p>Gender: {character.gender}</p>
-          <p>Type: {character.type || '-'}</p>
-        </div>
-      </div>
+    <div className="flex flex-col gap-2">
+      <h2 className="text-2xl font-bold text-gray-800">{character.name}</h2>
+      <p className="text-gray-600"><span className="font-semibold">Status:</span> {character.status}</p>
+      <p className="text-gray-600"><span className="font-semibold">Species:</span> {character.species}</p>
+      <p className="text-gray-600"><span className="font-semibold">Gender:</span> {character.gender}</p>
+      <p className="text-gray-600"><span className="font-semibold">Type:</span> {character.type || '-'}</p>
+    </div>
+  </div>
 
-      <h3 className="text-xl font-bold">Episodios</h3>
+  <h3 className="text-xl font-bold text-gray-800">Episodios</h3>
 
-      <EpisodeList
-        episodes={episodesQuery.data ?? []}
-        isLoading={episodesQuery.isLoading}
-      />
-    </section>
+  <EpisodeList
+    episodes={episodesQuery.data ?? []}
+    isLoading={episodesQuery.isLoading}
+  />
+</section>
   )
 }
+
