@@ -1,4 +1,4 @@
-import Home from './pages/Home'
+import Home from './features/characters/pages/Home'
 function App() {
   return (
    <div>
